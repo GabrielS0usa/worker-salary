@@ -2,6 +2,7 @@ package application;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 import java.util.Scanner;
@@ -17,6 +18,7 @@ public class Program {
 		Locale.setDefault(Locale.US);
 		Scanner sc = new Scanner(System.in);
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+		SimpleDateFormat sdf2 = new SimpleDateFormat("dd/MM");
 		
 		System.out.print("Enter department's name: ");
 		String departmentName = sc.nextLine();
@@ -47,13 +49,15 @@ public class Program {
 		}
 		
 		System.out.print("Enter month and vear to calculate income (MM/YYYY): ");
-		String monthAndYear = sc.next();
-		int month = Integer.parseInt(monthAndYear.substring(0, 2));
-		int year = Integer.parseInt(monthAndYear.substring(3));
+		Date monthAndYear = sdf2.parse(sc.next());
+		Calendar cal = Calendar.getInstance();
+		cal.setTime(monthAndYear);
+		int month = 1 + cal.get(Calendar.MONTH);
+		int year = cal.get(Calendar.YEAR);
 		
 		System.out.println("Name: " + worker.getName());
 		System.out.println("Name: " + worker.getDepartment().getName());
-		System.out.println("Ïncome for " + monthAndYear + ": " + String.format("%.2f", worker.income(year, month)));
+		System.out.println("Ïncome for " + sdf2.format(monthAndYear) + ": " + String.format("%.2f", worker.income(year, month)));
 		
 		sc.close();
 	}
