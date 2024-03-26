@@ -56,7 +56,7 @@ public class Program {
 		int year = cal.get(Calendar.YEAR);
 		
 		System.out.println("Name: " + worker.getName());
-		System.out.println("Name: " + worker.getDepartment().getName());
+		System.out.println("Department: " + worker.getDepartment().getName());
 		System.out.println("Ïncome for " + sdf2.format(monthAndYear) + ": " + String.format("%.2f", worker.income(year, month)));
 		
 		sc.close();
